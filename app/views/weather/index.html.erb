@@ -1,0 +1,17 @@
+<nav class="navbar navbar-dark bg-dark p-4">
+  <form class="container-fluid justify-content-start">
+    <div class="d-flex justify-content-center align-items-center">
+      <a href="https://owennewsome.net/#contact" class="btn btn-outline-success me-2" style="margin-left: 40px;">Contact Me</a>
+    </div>
+  </form>
+</nav>
+<div class="container  d-flex justify-content-center align-items-center mt-5">
+  <div class="justify-content-center">
+    <h1>Check the Weather in your city</h1>
+    <p>Just type in your city below and you are good to go!</p>
+    <%= simple_form_for :weather, url:weather_path, method: :get, html: { class: "from-inline"} do |f| %>
+      <%= f.input :city, label: "Enter City", input_html: { placeholder: "eg. Tokyo"} %>
+      <%= f.button :submit, "Get Weather", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
