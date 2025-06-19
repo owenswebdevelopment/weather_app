@@ -5,13 +5,25 @@
     </div>
   </form>
 </nav>
-<div class="container  d-flex justify-content-center align-items-center mt-5">
-  <div class="justify-content-center">
-    <h1>Check the Weather in your city</h1>
-    <p>Just type in your city below and you are good to go!</p>
-    <%= simple_form_for :weather, url:weather_path, method: :get, html: { class: "from-inline"} do |f| %>
-      <%= f.input :city, label: "Enter City", input_html: { placeholder: "eg. Tokyo"} %>
-      <%= f.button :submit, "Get Weather", class: "btn btn-success" %>
-    <% end %>
+<div class="container d-flex justify-content-center align-items-center m-5">
+  <div class="card p-4 shadow-lg bg-light text-dark rounded" style="max-width: 600px;">
+    <div class="card-body text-center">
+      <h2 class="card-title mb-3">Check the Weather in Your City</h2>
+      <%= form_with url: weather_path, method: :get, local: true, html: { class: "form-inline d-flex flex-column gap-3" } do |f| %>
+        <%= f.label :city, "Enter City" %>
+        <%= f.text_field :city, placeholder: "e.g. Tokyo" %>
+        <%= f.submit "Get Weather", class: "btn btn-success w-100 mb-4" %>
+      <% end %>
+      <%# <% @city ||= params.dig(:weather, :city) %>
+      <% if @weather.present? %>
+        <div class="pt-3 border-top mt-3 text-start">
+          <h2 class="card-title text-primary">Weather in <%= @city.capitalize %>:</h2>
+          <p class="card-text"><strong>🌡️ Temperature:</strong> <%= @weather["main"]["temp"] %> °C</p>
+          <p class="card-text"><strong>⛅ Condition:</strong> <%= @weather["weather"][0]["description"].capitalize %></p>
+          <p class="card-text"><strong>💧 Humidity:</strong> <%= @weather["main"]["humidity"] %> %</p>
+          <p class="card-text"><strong>🌬️ Feels Like:</strong> <%= @weather["main"]["feels_like"] %> °C</p>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

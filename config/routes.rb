@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "weather#index"
-  get "weather", to: "weather#show"
+  # post "weather", to: "weather#index"
+  match "weather", to: "weather#index", via: [:get, :post]
   match "/.well-known/*path", to: proc { [204, {}, [""]] }, via: :all
 end
