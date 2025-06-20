@@ -2,7 +2,8 @@
 
 This is a simple and clean weather app built with **Ruby on Rails** that lets users check the current weather in any city around the world using the **OpenWeatherMap API**.
 
-![Weather App Screenshot](./app/assets/images/screenshot.png)
+
+<img width="1432" alt="Screenshot 2025-06-20 at 12 35 55" src="https://github.com/user-attachments/assets/daa2146e-65a5-4519-b58e-b92bff0a6532" />
 
 ---
 
