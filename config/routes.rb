@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   root "weather#index"
   # post "weather", to: "weather#index"
   match "weather", to: "weather#index", via: [:get, :post]
-  match "/.well-known/*path", to: proc { [204, {}, [""]] }, via: :all
+  # match "/.well-known/*path", to: proc { [204, {}, [""]] }, via: :all
 end

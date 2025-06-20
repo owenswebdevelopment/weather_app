@@ -1,29 +1,41 @@
 <nav class="navbar navbar-dark bg-dark p-4">
   <form class="container-fluid justify-content-start">
     <div class="d-flex justify-content-center align-items-center">
-      <a href="https://owennewsome.net/#contact" class="btn btn-outline-success me-2" style="margin-left: 40px;">Contact Me</a>
+      <a href="https://owennewsome.net/#contact" class="btn btn-outline-warning me-2" style="margin-left: 40px;">Contact Me</a>
     </div>
   </form>
 </nav>
 <div class="container d-flex justify-content-center align-items-center m-5">
-  <div class="card p-4 shadow-lg bg-light text-dark rounded" style="max-width: 600px;">
-    <div class="card-body text-center">
-      <h2 class="card-title mb-3">Check the Weather in Your City</h2>
-      <%= form_with url: weather_path, method: :get, local: true, html: { class: "form-inline d-flex flex-column gap-3" } do |f| %>
-        <%= f.label :city, "Enter City" %>
-        <%= f.text_field :city, placeholder: "e.g. Tokyo" %>
-        <%= f.submit "Get Weather", class: "btn btn-success w-100 mb-4" %>
+  <% card_classes = "card p-4 shadow-lg text-dark rounded-5 border-0" %>
+  <% background_style = @is_daytime ?
+        "background: linear-gradient(to right, #e0f7fa, #ffffff);" :
+        "background: linear-gradient(to right, rgb(91, 105, 107), rgb(122, 122, 122));" %>
+  <div class="<%= card_classes %>" style="max-width: 500px; <%= background_style %>">
+    <% text_color_class = @is_daytime ? "text-dark" : "text-white" %>
+    <div class="<%= text_color_class  %> card-body text-center">
+      <h3 class="card-title mb-3">Check the Weather in Your City</h3>
+      <%= form_with url: weather_path, method: :get, local: true, html: { class: "form-inline d-flex flex-row gap-2" } do |f| %>
+        <%# <%= f.label :city, class: "form-label mb-0" %>
+        <%= f.text_field :city, placeholder: "e.g. Tokyo", class: "form-control pl-1", style: "height: 38px;" %>
+        <%= f.submit "Get Weather", class: "btn btn-outline-dark w-100 mb-4" %>
       <% end %>
-      <%# <% @city ||= params.dig(:weather, :city) %>
       <% if @weather.present? %>
-        <div class="pt-3 border-top mt-3 text-start">
-          <h2 class="card-title text-primary">Weather in <%= @city.capitalize %>:</h2>
-          <p class="card-text"><strong>🌡️ Temperature:</strong> <%= @weather["main"]["temp"] %> °C</p>
-          <p class="card-text"><strong>⛅ Condition:</strong> <%= @weather["weather"][0]["description"].capitalize %></p>
-          <p class="card-text"><strong>💧 Humidity:</strong> <%= @weather["main"]["humidity"] %> %</p>
-          <p class="card-text"><strong>🌬️ Feels Like:</strong> <%= @weather["main"]["feels_like"] %> °C</p>
-        </div>
-      <% end %>
-    </div>
+        <div class="pt-3 mt-3 text-start">
+          <h2 class="card-title">Weather in <%= @city.capitalize %>:</h2>
+          <%# <p class="card-text"><strong>🌡️ Condition:</strong> <%= @weather["weather"][0]["main"] %></p>
+        <p class="card-text"><strong>🌡️ Temperature:</strong> <%= @weather["main"]["temp"] %> °C</p>
+        <p class="card-text"><strong>⛅ Condition:</strong> <%= @weather["weather"][0]["description"].capitalize %></p>
+        <p class="card-text"><strong>💧 Humidity:</strong> <%= @weather["main"]["humidity"] %> %</p>
+        <p class="card-text"><strong>🌬️ Feels Like:</strong> <%= @weather["main"]["feels_like"] %> °C</p>
+      </div>
+      <div class="d-flex justify-content-end">
+        <% if @is_daytime %>
+          <i class="fa-duotone fa-solid fa-sun fa-3x"></i>
+        <% else %>
+          <i class="fa-solid fa-moon fa-3x"></i>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+</div>
 </div>

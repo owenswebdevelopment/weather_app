@@ -4,3 +4,9 @@
   right: 16px;
   z-index: 1000;
 }
+
+$bg-color: #d8672f;
+
+body {
+background: radial-gradient(circle at center, #ff9a9e, #fad0c4);
+}
